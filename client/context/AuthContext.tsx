@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import api from '@/lib/api';
 
-interface Address {
+export interface Address {
   _id?: string;
   label: string;
   fullName: string;
