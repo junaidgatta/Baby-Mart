@@ -83,3 +83,13 @@
 .pageBtn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 .pageBtn:disabled { opacity: 0.4; cursor: not-allowed; }
 .pageInfo { font-size: 13px; color: var(--text-secondary); }
+
+.exportGroup { display: flex; gap: 8px; border-left: 1px solid var(--border); padding-left: 16px; }
+.exportBtn {
+  padding: 8px 14px; border-radius: var(--radius); font-size: 13px; font-weight: 600;
+  background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-primary); transition: all 0.2s; cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+}
+.exportBtn:hover { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); transform: translateY(-1px); }
+.exportBtn:active { transform: translateY(0); }

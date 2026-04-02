@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import api from '../api/axios';
 import styles from './Orders.module.css';
+import { exportToExcel, exportToPDF } from '../utils/exportUtils';
 
 const STATUS_COLORS = {
   pending:   { bg: 'rgba(245,166,35,0.12)',  color: '#f5a623' },
@@ -71,6 +72,34 @@ export default function Orders() {
     }
   };
 
+  const handleExportExcel = () => {
+    const data = orders.map(o => ({
+      'Order #': o.orderNumber,
+      'Customer': o.user?.name || 'Guest',
+      'Email': o.user?.email,
+      'Items': o.items?.length,
+      'Total (Rs)': o.totalAmount,
+      'Status': o.status,
+      'Date': new Date(o.createdAt).toLocaleDateString()
+    }));
+    exportToExcel(data, `BabyMart-Orders-${filterStatus || 'All'}`);
+    showToast('📊 Excel exported successfully');
+  };
+
+  const handleExportPDF = () => {
+    const columns = ['Order #', 'Customer', 'Items', 'Total', 'Status', 'Date'];
+    const rows = orders.map(o => [
+      o.orderNumber,
+      o.user?.name || 'Guest',
+      o.items?.length,
+      `Rs ${o.totalAmount.toLocaleString()}`,
+      o.status.toUpperCase(),
+      new Date(o.createdAt).toLocaleDateString()
+    ]);
+    exportToPDF(columns, rows, `Orders Report (${filterStatus || 'All'})`, `BabyMart-Orders-${filterStatus || 'All'}`);
+    showToast('📄 PDF exported successfully');
+  };
+
   const pages = Math.ceil(total / 15);
 
   return (
@@ -89,6 +118,10 @@ export default function Orders() {
               {s || 'All'}
             </button>
           ))}
+        </div>
+        <div className={styles.exportGroup}>
+          <button onClick={handleExportExcel} className={styles.exportBtn} title="Excel Export">📊 Excel</button>
+          <button onClick={handleExportPDF} className={styles.exportBtn} title="PDF Export">📄 PDF</button>
         </div>
       </div>
 

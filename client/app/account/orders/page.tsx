@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import api from '@/lib/api';
-import styles from '../account/Account.module.css';
+import styles from '../Account.module.css';
 
 interface OrderItem {
   name: string;

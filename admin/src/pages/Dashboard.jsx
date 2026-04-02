@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../api/axios';
 import styles from './Dashboard.module.css';
+import { exportToExcel, exportToPDF } from '../utils/exportUtils';
 
 function StatCard({ icon, label, value, color }) {
   return (
@@ -39,11 +40,26 @@ export default function Dashboard() {
     );
   };
 
+  const handleExportSummary = () => {
+    const data = [
+      { Category: 'Total Revenue', Value: `Rs ${getRevenue().toLocaleString()}` },
+      { Category: 'Pending Orders', Value: getCount('pending') },
+      { Category: 'Confirmed Orders', Value: getCount('confirmed') },
+      { Category: 'Delivered Orders', Value: getCount('delivered') },
+      { Category: 'Recent Order Customer', Value: recentOrders[0]?.user?.name || 'N/A' },
+      { Category: 'Report Date', Value: new Date().toLocaleDateString() }
+    ];
+    exportToExcel(data, 'BabyMart-Sales-Summary');
+  };
+
   if (loading) return <div className={styles.loader}>Loading dashboard…</div>;
 
   return (
     <div className={styles.page}>
-      <h2 className={styles.heading}>Overview</h2>
+      <div className={styles.header}>
+        <h2 className={styles.heading}>Overview</h2>
+        <button onClick={handleExportSummary} className={styles.exportBtn}>📊 Export Summary</button>
+      </div>
 
       <div className={styles.statsGrid}>
         <StatCard icon="📦" label="Pending Orders"   value={getCount('pending')}   color="#f5a623" />
