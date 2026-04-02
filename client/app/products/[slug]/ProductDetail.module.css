@@ -1,0 +1,157 @@
+.grid {
+  display: grid;
+  grid-template-columns: 550px 1fr;
+  gap: 80px;
+}
+
+.imagesCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mainImg {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding-bottom: 100%;
+  position: relative;
+}
+
+.mainImg img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 40px;
+}
+
+.thumbs {
+  display: flex;
+  gap: 16px;
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  padding: 4px;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.activeThumb {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-glow);
+}
+
+.infoCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.cat {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.reviewCount {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.oldPrice {
+  font-size: 20px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.desc {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.meta {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.instock { color: var(--success); font-weight: 700; }
+.outstock { color: var(--danger); font-weight: 700; }
+
+.buyActions {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.qtyControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 48px;
+}
+
+.qtyControl button {
+  width: 44px;
+  height: 100%;
+  background: var(--bg-elevated);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.qtyControl span {
+  width: 50px;
+  text-align: center;
+  font-weight: 700;
+}

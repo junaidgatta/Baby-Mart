@@ -1,0 +1,72 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-base);
+  padding: 20px;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(124,111,247,0.08) 0%, transparent 60%),
+                    radial-gradient(ellipse at 80% 20%, rgba(91,200,250,0.06) 0%, transparent 50%);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+}
+
+.header { text-align: center; margin-bottom: 32px; }
+.logo { font-size: 48px; display: block; margin-bottom: 12px; }
+.title { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+.title span { color: var(--accent); }
+.subtitle { color: var(--text-secondary); font-size: 14px; margin-top: 6px; }
+
+.form { display: flex; flex-direction: column; gap: 18px; }
+
+.error {
+  background: rgba(255, 83, 112, 0.1);
+  border: 1px solid rgba(255, 83, 112, 0.3);
+  color: var(--danger);
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.field input {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.18s;
+  outline: none;
+}
+.field input:focus { border-color: var(--accent); }
+.field input::placeholder { color: var(--text-muted); }
+
+.btn {
+  margin-top: 6px;
+  padding: 13px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.18s, transform 0.12s;
+}
+.btn:hover:not(:disabled) { background: var(--accent-hover); transform: translateY(-1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-top: 20px;
+}

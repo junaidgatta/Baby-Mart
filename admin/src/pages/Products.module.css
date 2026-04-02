@@ -1,0 +1,66 @@
+.page { display: flex; flex-direction: column; gap: 20px; }
+.toast { position:fixed; top:20px; right:20px; z-index:9999; background:var(--bg-elevated); border:1px solid var(--border); color:var(--text-primary); padding:12px 20px; border-radius:var(--radius); box-shadow:var(--shadow); font-size:14px; }
+
+.toolbar { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.heading { font-size:22px; font-weight:700; display:flex; align-items:center; gap:10px; }
+.count { background:var(--accent-glow); color:var(--accent); font-size:13px; padding:2px 10px; border-radius:20px; font-weight:600; }
+.search { flex:1; min-width:200px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:9px 14px; color:var(--text-primary); font-size:14px; outline:none; transition:border-color 0.18s; }
+.search:focus { border-color:var(--accent); }
+.addBtn { padding:10px 20px; background:var(--accent); color:#fff; border-radius:var(--radius); font-weight:600; font-size:14px; transition:background 0.18s; white-space:nowrap; }
+.addBtn:hover { background:var(--accent-hover); }
+.loader { padding:60px; text-align:center; color:var(--text-secondary); }
+
+/* ── Grid ────────────────────────────────────── */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px; }
+.card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; transition:transform 0.18s, box-shadow 0.18s; }
+.card:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.cardImg { position:relative; height:160px; background:var(--bg-elevated); }
+.cardImg img { width:100%; height:100%; object-fit:cover; }
+.featured { position:absolute; top:8px; right:8px; background:rgba(124,111,247,0.85); color:#fff; font-size:11px; padding:3px 8px; border-radius:20px; font-weight:600; }
+.cardBody { padding:14px; display:flex; flex-direction:column; gap:6px; }
+.category { font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); font-weight:600; }
+.productName { font-size:14px; font-weight:600; line-height:1.4; }
+.priceRow { display:flex; align-items:center; gap:8px; }
+.price { font-size:16px; font-weight:700; color:var(--success); }
+.oldPrice { font-size:12px; color:var(--text-muted); text-decoration:line-through; }
+.meta { display:flex; justify-content:space-between; font-size:12px; color:var(--text-secondary); }
+.actions { display:flex; gap:8px; margin-top:4px; }
+.editBtn { flex:1; padding:7px; background:var(--accent-glow); color:var(--accent); border-radius:var(--radius-sm); font-size:13px; font-weight:500; transition:background 0.18s; }
+.editBtn:hover { background:var(--accent); color:#fff; }
+.deleteBtn { flex:1; padding:7px; background:rgba(255,83,112,0.1); color:var(--danger); border-radius:var(--radius-sm); font-size:13px; font-weight:500; transition:background 0.18s; }
+.deleteBtn:hover { background:var(--danger); color:#fff; }
+
+/* ── Modal ───────────────────────────────────── */
+.overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; }
+.modal { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); width:100%; max-width:640px; max-height:90vh; overflow-y:auto; box-shadow:var(--shadow); }
+.modalHeader { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; border-bottom:1px solid var(--border); }
+.modalHeader h3 { font-size:17px; font-weight:700; }
+.closeBtn { width:30px; height:30px; border-radius:var(--radius-sm); background:var(--bg-elevated); color:var(--text-secondary); font-size:14px; display:flex; align-items:center; justify-content:center; }
+.closeBtn:hover { color:var(--danger); }
+.modalForm { padding:24px; display:flex; flex-direction:column; gap:16px; }
+.formRow { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; }
+.field { display:flex; flex-direction:column; gap:6px; }
+.field label { font-size:12px; font-weight:500; color:var(--text-secondary); }
+.field input, .field select, .field textarea {
+  background:var(--bg-elevated); border:1px solid var(--border);
+  border-radius:var(--radius-sm); padding:9px 12px;
+  color:var(--text-primary); font-size:13px; outline:none;
+  transition:border-color 0.18s; resize:vertical;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color:var(--accent); }
+.checkRow { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-secondary); cursor:pointer; }
+.modalFooter { display:flex; gap:10px; justify-content:flex-end; padding-top:8px; border-top:1px solid var(--border); }
+.cancelBtn { padding:10px 20px; background:var(--bg-elevated); border:1px solid var(--border); color:var(--text-secondary); border-radius:var(--radius); font-size:14px; }
+.saveBtn { padding:10px 24px; background:var(--accent); color:#fff; border-radius:var(--radius); font-weight:600; font-size:14px; transition:background 0.18s; }
+.saveBtn:hover:not(:disabled) { background:var(--accent-hover); }
+.saveBtn:disabled { opacity:0.6; }
+
+.imageUpload { display: flex; gap: 8px; align-items: flex-start; }
+.imageUpload input { flex: 1; }
+.uploadBtnWrapper { position: relative; overflow: hidden; display: inline-block; }
+.uploadBtn { padding: 9px 14px; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--accent); font-size: 13px; font-weight: 600; border-radius: var(--radius-sm); transition: all 0.2s; white-space: nowrap; height: 38px; }
+.uploadBtnWrapper:hover .uploadBtn { background: var(--accent-glow); border-color: var(--accent); }
+.uploadBtnWrapper input[type=file] { font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer; height: 100%; width: 100%; }
+
+.preview { margin-top: 8px; border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 4px; display: inline-block; }
+.preview img { max-width: 120px; max-height: 80px; border-radius: 4px; display: block; object-fit: contain; }
