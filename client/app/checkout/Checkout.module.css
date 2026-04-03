@@ -244,3 +244,26 @@
   margin-top: 16px;
   line-height: 1.4;
 }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .layout { grid-template-columns: 1fr; gap: 40px; }
+  .sidebar { position: static; }
+}
+
+@media (max-width: 768px) {
+  .title { font-size: 24px; margin-bottom: 24px; }
+  .section { padding: 20px; }
+  .addressList { grid-template-columns: 1fr; }
+  .formGrid { grid-template-columns: 1fr; }
+  .fullWidth { grid-column: auto; }
+}
+
+@media (max-width: 480px) {
+  .sectionHeader { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .addrCard { padding: 15px; }
+  .paymentCard { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .selectedDot { align-self: flex-end; }
+  
+  .summaryCard { padding: 20px; }
+}
