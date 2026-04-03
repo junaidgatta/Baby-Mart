@@ -69,6 +69,18 @@ function LoginForm() {
         <p className={styles.foot}>
           Don't have an account? <Link href={`/register?redirect=${redirect}`}>Sign Up</Link>
         </p>
+
+        <div className={styles.divider}>
+          <span>OR</span>
+        </div>
+
+        <button 
+          onClick={() => alert('Google login will be connected once you provide the Google Client ID!')}
+          className={styles.googleBtn}
+        >
+          <img src="/images/google-icon.png" alt="G" />
+          Continue with Google
+        </button>
       </div>
     </div>
   );

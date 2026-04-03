@@ -24,11 +24,9 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     if (!authLoading) {
-      if (!user) {
-        router.push('/login?redirect=/checkout');
-      } else if (items.length === 0) {
+      if (items.length === 0) {
         router.push('/cart');
-      } else {
+      } else if (user) {
         const def = user.addresses.find(a => a.isDefault) || user.addresses[0];
         if (def) setSelectedAddress(def);
       }
@@ -38,13 +36,20 @@ export default function CheckoutPage() {
   const handleAddAddress = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    try {
-      await api.post('/users/addresses', { ...newAddr, isDefault: true });
-      await refreshUser();
+    
+    if (user) {
+      // For logged in users, save address to database
+      try {
+        await api.post('/users/addresses', { ...newAddr, isDefault: true });
+        await refreshUser();
+        setShowAddrForm(false);
+      } catch (err: any) {
+        setError(err.response?.data?.message || 'Failed to add address');
+      }
+    } else {
+      // For guest users, just select this address for the order
+      setSelectedAddress(newAddr as Address);
       setShowAddrForm(false);
-      // user.addresses will update, useEffect will select it
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to add address');
     }
   };
 
@@ -75,7 +80,11 @@ export default function CheckoutPage() {
     }
   };
 
-  if (authLoading || !user) return <div className="container section-padding">Authenticating...</div>;
+  if (authLoading) return <div className="container section-padding">Authenticating...</div>;
+
+  // For guest users, we need to show the address form by default
+  const isGuest = !user;
+  const effectiveShowAddrForm = showAddrForm || (isGuest && !selectedAddress);
 
   return (
     <div className="container section-padding">
@@ -96,7 +105,7 @@ export default function CheckoutPage() {
 
             {error && <p className={styles.error}>{error}</p>}
 
-            {showAddrForm ? (
+            {effectiveShowAddrForm ? (
               <form onSubmit={handleAddAddress} className={styles.addrForm}>
                 <div className={styles.formGrid}>
                   <input placeholder="Full Name" value={newAddr.fullName} onChange={e => setNewAddr({...newAddr, fullName: e.target.value})} required />
@@ -107,18 +116,19 @@ export default function CheckoutPage() {
                   <input placeholder="ZIP / Postal Code" value={newAddr.zip} onChange={e => setNewAddr({...newAddr, zip: e.target.value})} required />
                 </div>
                 <div className={styles.formActions}>
-                  <button type="button" onClick={() => setShowAddrForm(false)} className="btn btn-outline">Cancel</button>
-                  <button type="submit" className="btn btn-primary">Save Address</button>
+                  {!isGuest && <button type="button" onClick={() => setShowAddrForm(false)} className="btn btn-outline">Cancel</button>}
+                  <button type="submit" className="btn btn-primary">{isGuest ? 'Use this Address' : 'Save Address'}</button>
                 </div>
               </form>
             ) : (
               <div className={styles.addressList}>
-                {user.addresses.map((addr) => (
+                {user?.addresses.map((addr) => (
                   <div 
                     key={addr._id} 
                     className={`${styles.addrCard} ${selectedAddress?._id === addr._id ? styles.selected : ''}`}
                     onClick={() => setSelectedAddress(addr)}
                   >
+                    {/* ... Address details ... */}
                     <div className={styles.addrHeader}>
                       <span className={styles.label}>{addr.label}</span>
                       {selectedAddress?._id === addr._id && <span className={styles.check}>✓ Selected</span>}
@@ -129,7 +139,7 @@ export default function CheckoutPage() {
                     <p>{addr.phone}</p>
                   </div>
                 ))}
-                {user.addresses.length === 0 && <p className={styles.emptyHint}>No addresses saved. Please add one to continue.</p>}
+                {!user?.addresses.length && !isGuest && <p className={styles.emptyHint}>No addresses saved. Please add one to continue.</p>}
               </div>
             )}
           </section>
