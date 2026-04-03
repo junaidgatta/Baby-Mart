@@ -95,29 +95,30 @@ function ProductsContent() {
             <div className={styles.grid}>
               {products.map((p) => (
                 <div key={p._id} className="card">
-                  <Link href={`/products/${p.slug}`} className={styles.productImg}>
-                    <img src={p.images[0]} alt={p.name} />
-                  </Link>
-                  <div className={styles.productInfo}>
-                    <Link href={`/products/${p.slug}`}>
-                      <h3 className={styles.productName}>{p.name}</h3>
-                    </Link>
-                    <div className={styles.priceRow}>
-                      <span className={styles.price}>Rs {p.price.toLocaleString()}</span>
+                    <div className={styles.productImgContainer}>
+                      <Link href={`/products/${p.slug}`} className={styles.productImg}>
+                        <img src={p.images[0]} alt={p.name} />
+                      </Link>
                       {p.originalPrice > p.price && (
-                        <span className={styles.oldPrice}>Rs {p.originalPrice.toLocaleString()}</span>
+                        <span className={styles.discountBadge}>
+                          -{Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100)}%
+                        </span>
                       )}
                     </div>
-                    <button 
-                      onClick={() => handleAddToCart(p)}
-                      className={`${styles.addBtn} btn btn-outline`}
-                    >
-                      Add to Cart
-                    </button>
+                    <div className={styles.productInfo}>
+                      <Link href={`/products/${p.slug}`}>
+                        <h3 className={styles.productName}>{p.name}</h3>
+                      </Link>
+                      <div className={styles.priceRow}>
+                        <span className={styles.price}>Rs {p.price.toLocaleString()}</span>
+                        {p.originalPrice > p.price && (
+                          <span className={styles.oldPrice}>Rs {p.originalPrice.toLocaleString()}</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
           )}
         </main>
       </div>

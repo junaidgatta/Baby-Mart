@@ -123,6 +123,23 @@
   display: none;
 }
 
+.productImgContainer {
+  position: relative;
+  width: 100%;
+}
+
+.discountBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #232a4e;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 8px;
+  z-index: 5;
+}
+
 .loader {
   text-align: center;
   padding: 80px;
@@ -137,10 +154,10 @@
 
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
-  .sidebar { position: static; margin-bottom: 40px; }
-  .catList { flex-direction: row; overflow-x: auto; padding-bottom: 12px; gap: 16px; scrollbar-width: none; }
+  .sidebar { position: static; margin-bottom: 32px; }
+  .catList { flex-direction: row; overflow-x: auto; padding-bottom: 12px; gap: 12px; scrollbar-width: none; }
   .catList::-webkit-scrollbar { display: none; }
-  .catBtn { white-space: nowrap; flex-shrink: 0; background: var(--primary-bg); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--primary-glow); }
+  .catBtn { white-space: nowrap; flex-shrink: 0; background: var(--primary-bg); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--primary-glow); font-size: 14px; }
   .catBtn.active { padding-left: 16px; border: 1px solid var(--primary); }
   
   .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -149,7 +166,6 @@
 
 @media (max-width: 480px) {
   .grid { gap: 12px; }
-  .productName { font-size: 14px; height: 40px; }
-  .price { font-size: 16px; }
-  .addBtn { padding: 8px; font-size: 12px; }
+  .productName { font-size: 12px; height: auto; }
+  .price { font-size: 14px; }
 }
