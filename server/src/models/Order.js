@@ -31,8 +31,10 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
     },
+    isGuest: { type: Boolean, default: false },
+    guestEmail: { type: String },
     items:           [orderItemSchema],
     totalAmount:     { type: Number, required: true },
     shippingAddress: { type: shippingAddressSchema, required: true },

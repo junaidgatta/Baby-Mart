@@ -5,9 +5,8 @@ const { adminOnly } = require('../middleware/admin.middleware');
 
 const router = express.Router();
 
-// ─── POST /api/orders ─────────────────────────────────────────────────────────
 // Client — create order on checkout (COD)
-router.post('/', protect, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { items, shippingAddress, paymentMethod = 'cod' } = req.body;
 
@@ -18,14 +17,43 @@ router.post('/', protect, async (req, res) => {
 
     const totalAmount = items.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-    const order = await Order.create({
-      user: req.user._id,
+    const orderData = {
       items,
       totalAmount,
       shippingAddress,
       paymentMethod,
       status: 'pending',
-    });
+    };
+
+    // If logged in, attach user
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+       // Manual check since we removed middleware
+       try {
+         const jwt = require('jsonwebtoken');
+         const decoded = jwt.verify(authHeader.split(' ')[1], process.env.JWT_SECRET);
+         orderData.user = decoded.id;
+       } catch (e) {
+         orderData.isGuest = true;
+       }
+    } else {
+      orderData.isGuest = true;
+    }
+
+    const order = await Order.create(orderData);
+
+    // 📉 Decrement product stock
+    try {
+      const Product = require('../models/Product');
+      for (const item of items) {
+        await Product.findByIdAndUpdate(item.product, {
+          $inc: { stock: -item.qty }
+        });
+      }
+    } catch (stockErr) {
+      console.error('Stock decrement error:', stockErr);
+      // We don't block the order if stock update fails, but we log it
+    }
 
     res.status(201).json({ success: true, order });
   } catch (err) {
@@ -47,8 +75,8 @@ router.get('/my', protect, async (req, res) => {
 });
 
 // ─── GET /api/orders/:id ──────────────────────────────────────────────────────
-// Client — single order detail
-router.get('/:id', protect, async (req, res) => {
+// Client — single order detail (now public for success page)
+router.get('/:id', async (req, res) => {
   try {
     const order = await Order.findById(req.params.id).populate(
       'items.product',
@@ -56,11 +84,27 @@ router.get('/:id', protect, async (req, res) => {
     );
     if (!order) return res.status(404).json({ success: false, message: 'Order not found' });
 
-    // Only owner or admin can view
-    if (order.user.toString() !== req.user._id.toString() && req.user.role !== 'admin')
-      return res.status(403).json({ success: false, message: 'Not authorized' });
+    // Allow view if:
+    // 1. Order is guest order (needed for success page)
+    // 2. OR User is logged in and is the owner
+    // 3. OR User is an admin
+    if (order.isGuest) {
+       return res.json({ success: true, order });
+    }
 
-    res.json({ success: true, order });
+    // Manual auth check for non-guest orders
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      try {
+        const jwt = require('jsonwebtoken');
+        const decoded = jwt.verify(authHeader.split(' ')[1], process.env.JWT_SECRET);
+        if (order.user.toString() === decoded.id || decoded.role === 'admin') {
+           return res.json({ success: true, order });
+        }
+      } catch (e) {}
+    }
+
+    res.status(403).json({ success: false, message: 'Not authorized to view this order' });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
