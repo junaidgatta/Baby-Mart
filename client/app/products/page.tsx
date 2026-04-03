@@ -31,6 +31,7 @@ function ProductsContent() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showMobileCats, setShowMobileCats] = useState(false); // Mobile toggle state
   const addItem = useCartStore((state) => state.addItem);
   
   const currentCategory = searchParams.get('category') || '';
