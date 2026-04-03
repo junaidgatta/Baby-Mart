@@ -1,80 +1,156 @@
 .footer {
-  background: var(--bg-card);
-  border-top: 1px solid var(--border);
-  padding: 80px 0 40px;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding-bottom: 40px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px;
+/* ── Newsletter ── */
+.newsletter {
+  background-color: #1a1a1a;
+  padding: 40px 0;
   margin-bottom: 60px;
 }
-
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  margin-bottom: 20px;
+.newsletterContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.logo span { color: var(--primary); }
-
-.desc {
-  max-width: 320px;
-  color: var(--text-light);
+.newsletterInput {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 4px;
+}
+.newsletterInput input {
+  flex: 1;
+  border: none;
+  padding: 12px 20px;
   font-size: 14px;
+  outline: none;
+}
+.newsletterInput button {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 0 40px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.newsletterInput button:hover {
+  background: #fff;
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
 }
 
 .title {
   font-size: 16px;
   font-weight: 700;
+  color: #1a1a1a;
   margin-bottom: 24px;
+  letter-spacing: 0.5px;
 }
+.title span { display: none; } /* Only for mobile accordion */
 
-.list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.supportInfo p {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 12px;
 }
+.phone { font-weight: 700; font-size: 18px !important; }
+.timings { font-size: 13px !important; color: #666 !important; line-height: 1.5; }
+.email { color: var(--primary); font-weight: 600; text-decoration: underline; }
 
+.list { list-style: none; padding: 0; }
+.list li { margin-bottom: 12px; }
 .list a {
-  color: var(--text-light);
   font-size: 14px;
+  color: #555;
+  text-decoration: none;
   transition: color 0.2s;
 }
-.list a:hover {
-  color: var(--primary);
-}
+.list a:hover { color: #000; text-decoration: underline; }
 
-.bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 32px;
+/* ── Socials ── */
+.socialIcons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--text-muted);
-  font-size: 13px;
+  gap: 15px;
 }
-
-.socials {
-  display: flex;
-  gap: 20px;
-}
-
-.socials span {
+.iconLink {
   width: 36px;
   height: 36px;
-  background: var(--bg-elevated);
-  border-radius: 50%;
+  border: 1px solid #eee;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: var(--text-light);
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s;
   font-weight: 700;
-  font-size: 11px;
+  text-transform: lowercase;
 }
-.socials span:hover {
-  background: var(--primary-bg);
-  color: var(--primary);
+.iconLink:hover {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+/* ── Bottom ── */
+.bottom {
+  border-top: 1px solid #eee;
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.bottomLogo { font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 8px; }
+.bottomBrand p { font-size: 13px; color: #888; }
+.copyright p { font-size: 12px; color: #999; }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 992px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .newsletter { padding: 30px 0; }
+  .newsletterInput { flex-direction: column; background: transparent; gap: 10px; }
+  .newsletterInput button { padding: 15px; }
+
+  .grid { grid-template-columns: 1fr; gap: 0; }
+  .group { border-bottom: 1px solid #eee; padding: 15px 0; }
+  .group:first-child { border-bottom: none; padding-bottom: 30px; } /* Need Help doesn't fold */
+  
+  .title {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .title span { display: block; font-size: 20px; font-weight: 400; color: #999; }
+  
+  .list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  .open .list {
+    max-height: 200px;
+    margin-top: 15px;
+  }
+  
+  .bottom { flex-direction: column; align-items: center; text-align: center; gap: 30px; }
 }
