@@ -81,17 +81,6 @@ function RegisterForm() {
           Already have an account? <Link href={`/login?redirect=${redirect}`}>Login</Link>
         </p>
 
-        <div className={styles.divider}>
-          <span>OR</span>
-        </div>
-
-        <button 
-          onClick={() => alert('Google registration will be connected soon!')}
-          className={styles.googleBtn}
-        >
-          <img src="/images/google-icon.png" alt="G" />
-          Sign up with Google
-        </button>
       </div>
     </div>
   );

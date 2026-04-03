@@ -70,17 +70,6 @@ function LoginForm() {
           Don't have an account? <Link href={`/register?redirect=${redirect}`}>Sign Up</Link>
         </p>
 
-        <div className={styles.divider}>
-          <span>OR</span>
-        </div>
-
-        <button 
-          onClick={() => alert('Google login will be connected soon!')}
-          className={styles.googleBtn}
-        >
-          <img src="/images/google-icon.png" alt="G" />
-          Sign in with Google
-        </button>
       </div>
     </div>
   );
