@@ -75,11 +75,11 @@ function LoginForm() {
         </div>
 
         <button 
-          onClick={() => alert('Google login will be connected once you provide the Google Client ID!')}
+          onClick={() => alert('Google login will be connected soon!')}
           className={styles.googleBtn}
         >
           <img src="/images/google-icon.png" alt="G" />
-          Continue with Google
+          Sign in with Google
         </button>
       </div>
     </div>

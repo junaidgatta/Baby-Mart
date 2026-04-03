@@ -90,7 +90,7 @@ function RegisterForm() {
           className={styles.googleBtn}
         >
           <img src="/images/google-icon.png" alt="G" />
-          Continue with Google
+          Sign up with Google
         </button>
       </div>
     </div>
