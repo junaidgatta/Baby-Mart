@@ -111,3 +111,40 @@ img { max-width: 100%; display: block; }
   font-size: 12px;
   font-weight: 600;
 }
+
+/* ─── Global Responsive ────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 60px;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .section-padding {
+    padding: 40px 0;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  body {
+    font-size: 15px; /* Better for mobile readability */
+  }
+
+  /* Prevent side-scrolling across the whole site */
+  html, body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-padding {
+    padding: 30px 0;
+  }
+}

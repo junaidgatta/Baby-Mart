@@ -116,3 +116,23 @@
 }
 
 .empty { text-align: center; padding: 40px 0; color: var(--text-muted); }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 992px) {
+  .grid { grid-template-columns: 1fr; gap: 32px; }
+  .sidebar { width: 100%; }
+  .profile { margin-bottom: 24px; padding-bottom: 24px; }
+}
+
+@media (max-width: 768px) {
+  .title { font-size: 24px; margin-bottom: 24px; }
+  .tableHead { display: none; } /* Hide headers on very small screens, use stacked rows */
+  .tableRow { grid-template-columns: 1fr 1fr; gap: 8px; padding: 20px 0; }
+  .tableRow div:nth-child(2) { grid-column: span 2; font-weight: 700; color: var(--text); }
+  .tableRow div:nth-child(4) { text-align: right; }
+}
+
+@media (max-width: 480px) {
+  .card { padding: 16px; }
+  .avatar { width: 60px; height: 60px; font-size: 24px; }
+}
