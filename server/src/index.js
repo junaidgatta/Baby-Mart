@@ -16,10 +16,11 @@ const app = express();
 // ─── Middleware ───────────────────────────────────────────────────────────────
 app.use(cors({
   origin: [
-    'http://localhost:3000',   // Next.js client
-    'http://localhost:5173',   // Vite admin
+    'http://localhost:3000',
+    'http://localhost:5173',
     'https://baby-mart.vercel.app',
-    'https://baby-mart-admin.vercel.app'
+    'https://baby-mart-admin.vercel.app',
+    'https://baby-mart-2es3.vercel.app'
   ],
   credentials: true,
 }));
