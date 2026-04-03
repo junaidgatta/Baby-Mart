@@ -18,6 +18,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',   // Next.js client
     'http://localhost:5173',   // Vite admin
+    'https://baby-mart.vercel.app',
+    'https://baby-mart-admin.vercel.app'
   ],
   credentials: true,
 }));
