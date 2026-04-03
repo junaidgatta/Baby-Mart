@@ -130,3 +130,28 @@
   padding: 80px;
   color: var(--text-light);
 }
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 1024px) {
+  .layout { gap: 32px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; margin-bottom: 40px; }
+  .catList { flex-direction: row; overflow-x: auto; padding-bottom: 12px; gap: 16px; scrollbar-width: none; }
+  .catList::-webkit-scrollbar { display: none; }
+  .catBtn { white-space: nowrap; flex-shrink: 0; background: var(--primary-bg); padding: 8px 16px; border-radius: 8px; border: 1px solid var(--primary-glow); }
+  .catBtn.active { padding-left: 16px; border: 1px solid var(--primary); }
+  
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .title { font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .grid { gap: 12px; }
+  .productName { font-size: 14px; height: 40px; }
+  .price { font-size: 16px; }
+  .addBtn { padding: 8px; font-size: 12px; }
+}
