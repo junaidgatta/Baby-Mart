@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema(
     category:    {
       type: String,
       required: true,
-      enum: ['clothing', 'feeding', 'toys', 'diapers', 'skincare', 'accessories', 'safety', 'nursery'],
     },
     images:      [{ type: String }],
     stock:       { type: Number, required: true, default: 0, min: 0 },

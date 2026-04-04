@@ -7,6 +7,7 @@ const navItems = [
   { to: '/',         icon: '📊', label: 'Dashboard', end: true },
   { to: '/orders',   icon: '📦', label: 'Orders' },
   { to: '/products', icon: '🧸', label: 'Products' },
+  { to: '/categories',icon:'🏷️', label: 'Categories' },
 ];
 
 export default function Layout() {

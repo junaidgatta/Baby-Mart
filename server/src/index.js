@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user.routes');
 const productRoutes = require('./routes/product.routes');
 const orderRoutes = require('./routes/order.routes');
 const uploadRoutes = require('./routes/upload.routes');
+const categoryRoutes = require('./routes/category.routes');
 const path = require('path');
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/categories', categoryRoutes);
 
 // ─── Static Files for Image Uploads ──────────────────────────────────────────
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
