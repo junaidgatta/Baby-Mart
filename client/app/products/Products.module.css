@@ -70,7 +70,7 @@
 
 .productImg {
   display: block;
-  padding-bottom: 130%;
+  padding-bottom: 150%; /* 2:3 Aspect Ratio for Product shots */
   position: relative;
   overflow: hidden;
   background: #fff;
@@ -195,8 +195,11 @@
   .title { font-size: 20px; }
 }
 
+@media (min-width: 1536px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}
+
 @media (max-width: 480px) {
-  .grid { gap: 12px; }
-  .productName { font-size: 12px; height: auto; }
-  .price { font-size: 14px; }
+  .grid { grid-template-columns: 1fr; gap: 12px; } /* 1 item row for small screens */
+  .productName { font-size: 14px; height: auto; }
 }

@@ -36,6 +36,12 @@
 
   --max-width:   1280px;
 
+  /* Progressive Breakpoints */
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+
   --nav-height: 70px;
 }
 
@@ -112,39 +118,27 @@ img { max-width: 100%; display: block; }
   font-weight: 600;
 }
 
-/* ─── Global Responsive ────────────────────────── */
+/* ── Global Responsive Audit ── */
 @media (max-width: 768px) {
-  :root {
-    --nav-height: 60px;
-  }
-  
-  .container {
-    padding: 0 16px;
-  }
-  
-  .section-padding {
-    padding: 40px 0;
-  }
-  
-  .btn {
-    padding: 10px 20px;
-    font-size: 13px;
-  }
-
-  body {
-    font-size: 15px; /* Better for mobile readability */
-  }
-
-  /* Prevent side-scrolling across the whole site */
-  html, body {
-    overflow-x: hidden;
-    position: relative;
-    width: 100%;
-  }
+  :root { --nav-height: 60px; }
+  .container { padding: 0 16px; max-width: 100%; }
+  .section-padding { padding: 30px 0; }
+  .hide-mobile { display: none !important; }
 }
 
-@media (max-width: 480px) {
-  .section-padding {
-    padding: 30px 0;
-  }
+@media (min-width: 769px) {
+  .container { max-width: var(--container-md); }
+  .show-mobile { display: none !important; }
+}
+
+@media (min-width: 1024px) {
+  .container { max-width: var(--container-lg); }
+}
+
+@media (min-width: 1280px) {
+  .container { max-width: var(--container-xl); }
+}
+
+@media (min-width: 1536px) {
+  .container { max-width: var(--container-2xl); }
 }
