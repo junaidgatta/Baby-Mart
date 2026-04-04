@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import api from '../api/axios';
 import styles from './Products.module.css';
 
-const CATEGORIES = ['clothing','feeding','toys','diapers','skincare','accessories','safety','nursery'];
 const EMPTY_FORM = {
   name:'', slug:'', description:'', price:'', originalPrice:'',
-  category:'clothing', stock:'', isFeatured:false, ageRange:'0-12 months',
+  category:'', stock:'', isFeatured:false, ageRange:'0-12 months',
   images:[''], tags:'',
 };
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading]   = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing]   = useState(null);
@@ -31,7 +31,16 @@ export default function Products() {
     } finally { setLoading(false); }
   };
 
-  useEffect(() => { fetchProducts(); }, [search]);
+  const fetchCategories = async () => {
+    try {
+      const { data } = await api.get('/categories');
+      setCategories(data.categories);
+    } catch (err) {
+      console.error('Failed to load categories');
+    }
+  };
+
+  useEffect(() => { fetchProducts(); fetchCategories(); }, [search]);
 
   const openCreate = () => { setEditing(null); setForm(EMPTY_FORM); setShowModal(true); };
   const openEdit   = (p) => {
@@ -189,8 +198,9 @@ export default function Products() {
               <div className={styles.formRow}>
                 <div className={styles.field}>
                   <label>Category *</label>
-                  <select value={form.category} onChange={e => set('category', e.target.value)}>
-                    {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                  <select value={form.category} onChange={e => set('category', e.target.value)} required>
+                    <option value="" disabled>Select a Category</option>
+                    {categories.map(c => <option key={c._id} value={c.slug}>{c.name}</option>)}
                   </select>
                 </div>
                 <div className={styles.field}>
