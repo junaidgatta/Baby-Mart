@@ -6,7 +6,8 @@
 .title {
   font-size: 24px;
   margin-bottom: 24px;
-  color: var(--text);
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 .grid {
@@ -17,11 +18,11 @@
 }
 
 .formCard, .listCard {
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--radius);
   border: 1px solid var(--border);
   padding: 24px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow);
 }
 
 .cardTitle {
@@ -30,6 +31,7 @@
   margin-bottom: 20px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
 }
 
 .formGroup {
@@ -40,15 +42,17 @@
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-bottom: 6px;
 }
 
 .formGroup input, .formGroup textarea {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid var(--border-dark);
+  background: var(--bg-base);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+  color: var(--text-primary);
   font-family: inherit;
   font-size: 14px;
 }
@@ -56,6 +60,7 @@
 .formGroup input:disabled {
   background: var(--bg-elevated);
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .formActions {
@@ -65,19 +70,25 @@
 }
 
 .btnPrimary {
-  background: var(--primary);
+  background: var(--accent);
   color: white;
   border: none;
   padding: 10px 16px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btnPrimary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 12px var(--accent-glow);
 }
 
 .btnOutline {
   background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border-dark);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
   padding: 10px 16px;
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -96,20 +107,20 @@
 .table th, .table td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 
 .table th {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 12px;
 }
 
 .iconCell { font-size: 20px; text-align: center; }
-.boldCell { font-weight: 600; color: var(--text); }
-.slugCell { font-family: monospace; color: var(--text-light); }
+.boldCell { font-weight: 600; color: var(--text-primary); }
+.slugCell { font-family: monospace; color: var(--text-secondary); }
 
 .editBtn, .deleteBtn {
   background: transparent;
@@ -120,7 +131,7 @@
   margin-right: 12px;
 }
 
-.editBtn { color: var(--primary); }
+.editBtn { color: var(--accent); }
 .deleteBtn { color: var(--danger); }
 
 .empty {
